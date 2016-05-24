@@ -1,6 +1,6 @@
 import User from '../../models/User';
 
-export const Authentication = {
+export const Register = {
 
 	getRegister: {
 		path: '/register',
