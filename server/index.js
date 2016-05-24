@@ -26,6 +26,30 @@ App.importControllers = (namespace, controllerPaths) => {
 	}
 }
 
+App.buildRoutes = (router, controllers) => {
+	for (const key of Object.keys(controllers)) {
+
+		const routes = controllers[key];
+
+		if (Object.keys(routes).length > 0) {
+			for (const key of Object.keys(controllers[key])) {
+
+				const route = routes[key];
+
+				switch(route.method) {
+					case 'get':
+						router.get(route.path, route.middleware || [], route.controller);
+					break;
+					case 'post':
+						router.post(route.path, route.middleware || [], route.controller);
+					break;
+					default: router.get(route.path, route.middleware || [], route.controller);
+				}
+			}
+		}
+	}
+}
+
 export class Server {
 
 	/**
@@ -97,6 +121,7 @@ export class Server {
 		// Finally, listen to the server and connect to our database.
 		App.listen(8080, function() {
 			Mongoose.connect(`mongodb://localhost/${Config.database.name}`, () => callback('Connected successfully at http://localhost:8080'));
+			App.buildRoutes(Router, Controller);
 		});
 	}
 }

@@ -1,6 +1,9 @@
 export const HomePage = {
 
-	index(req, res, next) {
-		res.render('index', { user: req.user });
+	index: {
+		path: '/',
+		controller(req, res, next) {
+			res.render('index', { user: req.user });
+		}
 	}
 }
