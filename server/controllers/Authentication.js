@@ -1,4 +1,5 @@
 import Passport from 'passport';
+import User from '../models/User';
 
 export const Authentication = {
 
@@ -13,7 +14,7 @@ export const Authentication = {
 		path: '/register',
 		method: 'post',
 		controller(req, res, next) {
-			User.register(new User({ username: req.body.username }), req.body.password, function(err) {
+			User.register(new User({ username: req.body.username }), req.body.password, (err) => {
 				if (err) {
 					console.log('Error registering user.', err);
 					return next(err);
