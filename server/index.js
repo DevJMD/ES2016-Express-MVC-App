@@ -31,7 +31,7 @@ App.buildRoutes = (router, controllers) => {
 
 		const routes = controllers[key];
 
-		if (Object.keys(routes).length > 0) {
+		if (routes) {
 			for (const key of Object.keys(controllers[key])) {
 
 				const route = routes[key];
