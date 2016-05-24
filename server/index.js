@@ -28,7 +28,6 @@ App.importControllers = (namespace, controllerPaths) => {
 
 App.buildRoutes = (router, controllers) => {
 	for (const key of Object.keys(controllers)) {
-
 		const routes = controllers[key];
 
 		if (routes) {
@@ -48,6 +47,8 @@ App.buildRoutes = (router, controllers) => {
 			}
 		}
 	}
+
+	router.get('*', (req, res) => res.sendStatus(404));
 }
 
 export class Server {
