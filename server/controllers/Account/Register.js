@@ -5,7 +5,7 @@ export const Register = {
 	getRegister: {
 		path: '/register',
 		controller(req, res) {
-			res.render('account/register', { csrfToken: req.csrfToken() });
+			return res.render('account/register', { csrfToken: req.csrfToken() });
 		}
 	},
 
@@ -19,7 +19,7 @@ export const Register = {
 					return next(err);
 				}
 
-				res.redirect('/');
+				res.redirect(`/account/${encodeURIComponent(req.user.username)}`);
 			});
 		}
 	}

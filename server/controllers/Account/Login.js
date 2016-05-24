@@ -5,11 +5,11 @@ export const Login = {
 	getLogin: {
 		path: '/login',
 		controller(req, res, next) {
-			if (!req.isAuthenticated()) {
-				res.render('account/login', { csrfToken: req.csrfToken() });
-			} else {
-				res.redirect('/');
+			if (req.isAuthenticated()) {
+				return res.redirect(`/account/${encodeURIComponent(req.user.username)}`);
 			}
+
+			res.render('account/login', { csrfToken: req.csrfToken() });
 		},
 	},
 
@@ -18,7 +18,7 @@ export const Login = {
 		method: 'post',
 		middleware: [Passport.authenticate('local')],
 		controller(req, res, next) {
-			res.redirect('/');
+			return res.redirect(`/account/${encodeURIComponent(req.user.username)}`);
 		}
 	}
 }
