@@ -1,12 +1,12 @@
+import { EnsureAuthenticated } from '../../middleware';
+
 export const Logout = {
 
 	getLogout: {
 		path: '/logout',
+		middleware: [EnsureAuthenticated],
 		controller(req, res, next) {
-			if (req.isAuthenticated()) {
-				req.logout();
-			}
-
+			req.logout();
 			res.redirect('/');
 		}
 	}

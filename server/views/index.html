@@ -3,7 +3,8 @@
 {% block content %}
 
 	{% if isAuthenticated %}
-		<h1>Hello, {{user.username}}</h1>
+		<h2>Hello, {{user.username}}</h2>
+		<a href="/logout">Logout</a>
 	{% else %}
 		<a href="/login">Login</a> or <a href="/register">Register</a>
 	{% endif %}

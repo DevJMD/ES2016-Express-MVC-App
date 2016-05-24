@@ -5,7 +5,11 @@ export const Register = {
 	getRegister: {
 		path: '/register',
 		controller(req, res) {
-			return res.render('account/register', { csrfToken: req.csrfToken() });
+			if (req.isAuthenticated()) {
+				return res.redirect(`/account/${encodeURIComponent(req.user.username)}`);
+			}
+
+			res.render('account/register', { csrfToken: req.csrfToken() });
 		}
 	},
 
@@ -19,7 +23,7 @@ export const Register = {
 					return next(err);
 				}
 
-				res.redirect(`/account/${encodeURIComponent(req.user.username)}`);
+				res.redirect('/login');
 			});
 		}
 	}
